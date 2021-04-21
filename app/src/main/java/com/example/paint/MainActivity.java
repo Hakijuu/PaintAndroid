@@ -18,6 +18,7 @@ public class MainActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         SeekBar sb = findViewById(R.id.sizeBar);
+        sbValue = sb.getProgress();
         color = Color.BLACK;
         buttonBLACK = findViewById(R.id.buttonBLACK);
         buttonWHITE = findViewById(R.id.buttonWHITE);
