@@ -3,7 +3,6 @@ package com.example.paint;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.RectF;
 import android.util.AttributeSet;
@@ -14,9 +13,10 @@ import androidx.annotation.NonNull;
 import java.util.ArrayList;
 import java.util.List;
 import static com.example.paint.MainActivity.getsbValue;
+import static com.example.paint.MainActivity.getColor;
 
 public class PaintView extends SurfaceView implements SurfaceHolder.Callback{
-    List<RectF> ovalsMap;
+    List<Oval> ovalsMap;
     Paint paint;
     int sbValue;
 
@@ -44,20 +44,25 @@ public class PaintView extends SurfaceView implements SurfaceHolder.Callback{
 
     @SuppressLint("ClickableViewAccessibility")
     public boolean onTouchEvent(MotionEvent event) {
-        sbValue = getsbValue();
-        RectF oval = new RectF(event.getX()-sbValue,event.getY()-sbValue,event.getX()+sbValue,event.getY()+sbValue);
+        Oval oval = new Oval(event.getX(), event.getY(), getColor(), getsbValue());
         ovalsMap.add(oval);
         invalidate(); //Wymagane jest przemalowanie ekranu -> onDraw
         return true;
     }
 
     protected void onDraw(Canvas canvas) {
-        paint.setColor(Color.RED);
-
-        for (RectF oval : ovalsMap) {
-            canvas.drawOval(oval, paint);
+        for (Oval oval : ovalsMap) {
+            paint.setColor(oval.color);
+            canvas.drawOval(oval.o, paint);
         }
     }
 
-
+    private static class Oval {
+        int color;
+        RectF o;
+        public Oval(float x, float y, int color, int size){
+          o = new RectF(x-size,y-size,x+size,y+size);
+          this.color = color;
+      }
+    }
 }
