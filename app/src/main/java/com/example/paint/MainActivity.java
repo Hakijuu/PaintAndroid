@@ -38,13 +38,13 @@ public class MainActivity extends AppCompatActivity{
 
         buttonYELLOW.setOnClickListener(v -> color = Color.YELLOW);
 
-        buttonORANGE.setOnClickListener(v -> color = 0);
+        buttonORANGE.setOnClickListener(v -> color = Color.parseColor("#FF9111"));
 
         buttonRED.setOnClickListener(v -> color = Color.RED);
 
-        buttonPINK.setOnClickListener(v -> color = 0);
+        buttonPINK.setOnClickListener(v -> color = Color.parseColor("#FF00FF"));
 
-        buttonPURPLE.setOnClickListener(v -> color = 0);
+        buttonPURPLE.setOnClickListener(v -> color = Color.parseColor("#800080"));
 
         buttonBLUE.setOnClickListener(v -> color = Color.BLUE);
 
